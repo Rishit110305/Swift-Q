@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   const fetchTickets = () => {
     console.log("Fetching tickets for Department ID:", deptId);
 
-    axios.get(`http://localhost:8080/api/queue/list/${deptId}`)
+    axios.get(`https://swift-q.onrender.com/queue/list/${deptId}`)
       .then(res => {
         console.log("Server replied:", res.data);
         setTickets(res.data.tickets);
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
 
   const callNext = async () => {
     try {
-      await axios.post('http://localhost:8080/api/queue/next', { deptId });
+      await axios.post('https://swift-q.onrender.com/api/queue/next', { deptId });
       fetchTickets(); 
     } catch (err) {
       alert("Failed to call next patient");

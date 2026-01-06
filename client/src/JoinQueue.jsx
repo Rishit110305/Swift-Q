@@ -24,14 +24,14 @@ const JoinQueue = () => {
   }, [user]); // automatically display the name of patient on the joining page .
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/departments')
+    axios.get('https://swift-q.onrender.com/api/departments')
       .then(res => {
         const found = res.data.find(d => d._id === deptId);
         if (found) setDepartment(found);
       })
       .catch(err => console.error("Dept Error:", err));
 
-    axios.get(`http://localhost:8080/api/queue/length/${deptId}`)
+    axios.get(`https://swift-q.onrender.com/api/queue/length/${deptId}`)
       .then(res => {
         setPeopleAhead(res.data.count); 
       })
@@ -49,7 +49,7 @@ const JoinQueue = () => {
     }
 
     try {
-      await axios.post('http://localhost:8080/api/queue/join', {
+      await axios.post('https://swift-q.onrender.com/api/queue/join', {
         deptId,
         name: formData.name,
         phone: formData.phone,

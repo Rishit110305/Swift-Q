@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:8080/api/departments')
+    axios.get('https://swift-q.onrender.com/api/departments')
       .then(res => {
         setDepartments(res.data);
         setLoading(false);
