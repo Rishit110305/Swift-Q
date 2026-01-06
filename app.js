@@ -5,7 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const http = require('http');               
 const { Server } = require("socket.io");   
-const cors = require('cors'); // Cross-Origin Resource Sharing
+const cors = require('cors'); 
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -17,7 +17,13 @@ const queueRoutes = require('./routes/queue');
 
 const app = express();
 const port = 8080;
-const url = process.env.MONGO_URL
+const url = process.env.MONGO_URL;
+
+// ✅ Allowed Frontend Origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://swift-q.vercel.app"
+];
 
 // 1. Database Connection
 async function connect() {
@@ -34,8 +40,9 @@ connect();
 const server = http.createServer(app); 
 const io = new Server(server, {        
   cors: {
-    origin: "http://localhost:5173",   // FrontEnd 
-    methods: ["GET", "POST"]
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -50,23 +57,31 @@ io.on('connection', (socket) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({extended : true}));
-app.use(express.json()); 
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// ✅ FIXED CORS FOR REST APIs
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
+
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
 // 3. Register Routes
 app.get("/", (req, res) => {
-    res.send("<h1>SwiftQ Server is Running 🚀</h1>");
+  res.send("<h1>SwiftQ Server is Running 🚀</h1>");
 });
 
 app.use('/api/auth', authRoutes);
-app.use('/api/departments', departmentRoutes); // All routes inside start with /api/departments
-app.use('/api/queue', queueRoutes); // Contains /join-queue, /next-patient, /queue-status/:deptId
+app.use('/api/departments', departmentRoutes);
+app.use('/api/queue', queueRoutes);
 
 // 4. Start Server
-// IMPORTANT: Use 'server.listen', not 'app.listen' when using Socket.io with HTTP server
 server.listen(port, () => {
-    console.log(`🚀 Server is listening on port ${port}`);
+  console.log(`🚀 Server is listening on port ${port}`);
 });
