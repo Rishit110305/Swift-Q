@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const AdminDashboard = () => {
+  // 1. Get the Department ID from the URL (e.g., /admin/695d...)
   const { deptId } = useParams();
   
   const [tickets, setTickets] = useState([]);
@@ -10,15 +11,21 @@ const AdminDashboard = () => {
   const [errorMsg, setErrorMsg] = useState(""); 
   const [currentPatient, setCurrentPatient] = useState(null);
 
+  // 2. Function to fetch the ticket list from Render
   const fetchTickets = () => {
     console.log("Fetching tickets for Department ID:", deptId);
 
-    axios.get(`https://swift-q.onrender.com/api/queue/list/${departmentId}`)
+    // ✅ FIXED: Changed 'departmentId' to 'deptId' to match the variable above
+    axios.get(`https://swift-q.onrender.com/api/queue/list/${deptId}`)
       .then(res => {
         console.log("Server replied:", res.data);
-        setTickets(res.data.tickets);
         
-        const serving = res.data.tickets.find(t => t.status === 'serving');
+        // Safety check: ensure tickets is always an array
+        const ticketList = res.data.tickets || []; 
+        setTickets(ticketList);
+        
+        // Find if anyone is currently being served
+        const serving = ticketList.find(t => t.status === 'serving');
         setCurrentPatient(serving || null);
         
         setLoading(false);
@@ -30,30 +37,38 @@ const AdminDashboard = () => {
       });
   };
 
+  // 3. Initial Load & Auto-Refresh
   useEffect(() => {
     if (!deptId) {
       setErrorMsg("Error: Department ID is missing in URL");
       setLoading(false);
       return;
     }
-    fetchTickets();
-    const interval = setInterval(fetchTickets, 5000); // every 5 seconds for continuous updates.
-    return () => clearInterval(interval);
+    
+    fetchTickets(); // Run immediately
+    const interval = setInterval(fetchTickets, 5000); // Run every 5 seconds
+    
+    return () => clearInterval(interval); // Cleanup on exit
   }, [deptId]);
 
+  // 4. Function to call the next patient
   const callNext = async () => {
     try {
+      // ✅ FIXED: Using 'deptId' here as well
       await axios.post('https://swift-q.onrender.com/api/queue/next', { deptId });
-      fetchTickets(); 
+      fetchTickets(); // Refresh immediately after update
     } catch (err) {
       alert("Failed to call next patient");
     }
   };
 
+  // --- UI RENDER ---
+
   if (errorMsg) return (
     <div className="p-10 text-center">
       <h2 className="text-2xl font-bold text-red-600 mb-2">Something went wrong!</h2>
       <p className="text-slate-600 mb-4">{errorMsg}</p>
+      <Link to="/" className="text-blue-500 underline">Go Back Home</Link>
     </div>
   );
 
@@ -63,12 +78,12 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-slate-50 p-6">
       <div className="max-w-6xl mx-auto">
         
-        {/* --- HEADER SECTION (UPDATED) --- */}
+        {/* --- HEADER --- */}
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
             <h1 className="text-3xl font-bold text-slate-800">Doctor Dashboard 👨‍⚕️</h1>
             
-            {/* NEW BUTTON: Opens TV Mode in a new tab */}
+            {/* Opens TV Mode in a new tab */}
             <Link 
               to={`/tv/${deptId}`} 
               target="_blank" 
@@ -84,7 +99,8 @@ const AdminDashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Current Patient Card */}
+          
+          {/* --- LEFT COLUMN: CURRENT PATIENT --- */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-100 text-center">
               <h2 className="text-slate-400 font-bold uppercase tracking-wider mb-2">Now Serving</h2>
@@ -108,7 +124,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          {/* Waiting List */}
+          {/* --- RIGHT COLUMN: WAITING LIST --- */}
           <div className="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden flex flex-col h-[600px]">
             <div className="bg-slate-100 p-4 border-b border-slate-200">
               <h3 className="font-bold text-slate-700">Waiting Queue ({tickets.filter(t => t.status === 'pending').length})</h3>
@@ -129,6 +145,7 @@ const AdminDashboard = () => {
               )}
             </div>
           </div>
+
         </div>
       </div>
     </div>
