@@ -17,7 +17,7 @@ const queueRoutes = require('./routes/queue');
 
 const app = express();
 const port = 8080;
-const url = 'mongodb://127.0.0.1:27017/swift-Q';
+const url = process.env.MONGO_URL
 
 // 1. Database Connection
 async function connect() {

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs'); // hashing of the user's pass
 const jwt = require('jsonwebtoken'); // maintain n store the session 
 const User = require('../models/User');
 
-const JWT_SECRET = process.env.JWT_SECRET || "super_secret_swiftq_key_1234"; 
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 // --- REGISTER ROUTE ---
 router.post('/register', async (req, res) => {
