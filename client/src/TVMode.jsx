@@ -15,13 +15,13 @@ const TVMode = () => {
       try {
         // 1. Get Dept Name
         if (!department) {
-          const deptRes = await axios.get('http://localhost:8080/api/departments');
+          const deptRes = await axios.get('https://swift-q.onrender.com/api/departments');
           const found = deptRes.data.find(d => d._id === deptId);
           if (found) setDepartment(found);
         }
 
         // 2. Get Tickets
-        const res = await axios.get(`http://localhost:8080/api/queue/list/${deptId}`);
+        const res = await axios.get(`https://swift-q.onrender.com/api/queue/list/${deptId}`);
         setTickets(res.data.tickets);
 
         // 3. Find who is being served

@@ -15,14 +15,14 @@ const QueueStatus = () => {
 
   const fetchStatus = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/queue-status/${deptId}`);
+      const res = await axios.get(`https://swift-q.onrender.com/api/queue-status/${deptId}`);
       setStatus(res.data);
     } catch (error) { console.error(error); }
   };
 
   useEffect(() => {
     fetchStatus();
-    const socket = io("http://localhost:8080");
+    const socket = io("https://swift-q.onrender.com");
 
     // Listen for updates, but ONLY refresh data (no sound)
     socket.on(`update-${deptId}`, () => {

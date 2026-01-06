@@ -9,7 +9,7 @@ const MyTickets = () => {
 
   useEffect(() => {
     if (user?.id) {
-      axios.get(`http://localhost:8080/api/queue/user/${user.id}`)
+      axios.get(`https://swift-q.onrender.com/api/queue/user/${user.id}`)
         .then(res => {
           setTickets(res.data.tickets);
           setLoading(false);
