@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   const fetchTickets = () => {
     console.log("Fetching tickets for Department ID:", deptId);
 
-    axios.get(`https://swift-q.onrender.com/queue/list/${deptId}`)
+    axios.get(`https://swift-q.onrender.com/api/queue/list/${departmentId}`)
       .then(res => {
         console.log("Server replied:", res.data);
         setTickets(res.data.tickets);
