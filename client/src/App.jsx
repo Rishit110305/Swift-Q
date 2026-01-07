@@ -63,7 +63,7 @@ function App() {
               </AdminRoute>
             } />
             
-            {/* 👇 FIX 2: Use the TVDisplay component here */}
+            {/*  FIX 2: Use the TVDisplay component here */}
             <Route path="/tv/:deptId" element={<TVMode />} />
 
           </Routes>

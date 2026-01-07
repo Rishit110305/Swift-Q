@@ -57,4 +57,4 @@ const TVDisplay = () => {
   );
 };
 
-export default TVDisplay;
+export default TVMode;
