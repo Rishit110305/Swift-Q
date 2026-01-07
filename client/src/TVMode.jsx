@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const TVDisplay = () => {
+const TVMode = () => {
   const { deptId } = useParams();
   const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
