@@ -9,8 +9,8 @@ import QueueStatus from './QueueStatus';
 import MyTickets from './MyTickets';
 import AdminDashboard from './AdminDashboard'; 
 
-// 👇 FIX 1: Import the file you actually created ("TVDisplay")
-import TVDisplay from './TVDisplay'; 
+//  FIX 1: Import the file you actually created ("TVDisplay")
+import TVMode from './TVMode'; 
 
 // ... (Your PrivateRoute and AdminRoute code is perfect, keep it!) ...
 const PrivateRoute = ({ children }) => {
@@ -64,7 +64,7 @@ function App() {
             } />
             
             {/* 👇 FIX 2: Use the TVDisplay component here */}
-            <Route path="/tv/:deptId" element={<TVDisplay />} />
+            <Route path="/tv/:deptId" element={<TVMode />} />
 
           </Routes>
         </BrowserRouter>
