@@ -51,7 +51,7 @@
 
 | **Home Page** | **Admin Dashboard** |
 |:---:|:---:|
-| ![Home](https://via.placeholder.com/400x200?text=Home+Page) | ![Dashboard](https://via.placeholder.com/400x200?text=Admin+Dashboard) |
+| ![Home](<img src="https://github.com/user-attachments/assets/ab3205ce-dbfd-4c3a-9b1b-7fa8a0ea8c45" width="100%" />) | ![Dashboard](https://via.placeholder.com/400x200?text=Admin+Dashboard) |
 
 | **TV Display Mode** | **Mobile View** |
 |:---:|:---:|
