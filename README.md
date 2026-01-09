@@ -58,3 +58,18 @@
 | Tv Display | Mobile View |
 |------------------|-------------|
 | <img src="screenshots/TvDisplay.png" width="400"/> | <img src="screenshots/PhoneView.png" width="400"/> |
+
+## 👨‍💻 About Me
+**Rishit Goswami** *Full-Stack Developer*
+
+“I’m a developer who’s deeply passionate about backend engineering. While frontend shows the beauty of an application, what excites me more is the logic that powers it — how data is processed, how systems communicate, and how everything works reliably behind the scenes. I enjoy understanding and implementing the core mechanics that make applications function at scale.”
+
+📫 **Let's Connect:**
+- [GitHub](https://github.com/Rishit110305)
+
+# 📫 Contact
+If you have feedback or suggestions, feel free to connect with me.
+
+Developer: Rishit Goswami
+Gmail : rishitgoswami3740@gmail.com
+
