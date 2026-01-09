@@ -49,3 +49,12 @@
 
 ## 📸 Screenshots
 
+## 📸 Screenshots
+
+| Home Page | Admin / Dashboard |
+|-----------|-------------------|
+| <img src="screenshots/homePage.png" width="400"/> | <img src="screenshots/adminDashboard.png" width="400"/> |
+
+| Tv Display | Mobile View |
+|------------------|-------------|
+| <img src="screenshots/TvDisplay.png" width="400"/> | <img src="screenshots/PhoneView.png" width="400"/> |
