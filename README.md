@@ -57,7 +57,7 @@
 
 | Tv Display | Mobile View |
 |------------------|-------------|
-| <img src="screenshots/TvDisplay.png" width="400"/> | <img src="screenshots/PhoneView.png" width="400"/> |
+| <img src="screenshots/TvDisplay.png" width="400" height="400"/> | <img src="screenshots/PhoneView.png" width="400" height="400"/> |
 
 ## 👨‍💻 About Me
 **Rishit Goswami** *Full-Stack Developer*
