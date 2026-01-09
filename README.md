@@ -1,6 +1,5 @@
 # 🏥 SwiftQ - Smart Hospital Queue Management System
 
-![SwiftQ Banner](https://via.placeholder.com/1200x400?text=SwiftQ+Queue+Management+System) 
 **SwiftQ** is a full-stack real-time application designed to streamline hospital waiting rooms. It allows patients to join queues remotely, track their live status, and enables doctors to manage appointments efficiently through a digital dashboard.
 
 ## 🚀 Live Demo
